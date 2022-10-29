@@ -1,0 +1,6 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+
+# MERN eCommerce App - MongoDB, Express, React, Node 2022 | 2:10:32 / 10:56:32
