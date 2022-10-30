@@ -63,5 +63,37 @@ export const products = [
     category: 'Women',
     image: '/images/products/4.jpg',
     price: '92.00'
+  },
+  {
+    _id: 5,
+    title: 'Product 5',
+    desc: 'Description for Product 5',
+    category: 'Men',
+    image: '/images/products/5.jpg',
+    price: '87.00'
+  },
+  {
+    _id: 6,
+    title: 'Product 6',
+    desc: 'Description for Product 6',
+    category: 'Kids',
+    image: '/images/products/6.jpg',
+    price: '62.00'
+  },
+  {
+    _id: 7,
+    title: 'Product 7',
+    desc: 'Description for Product 7',
+    category: 'Women',
+    image: '/images/products/7.jpg',
+    price: '76.00'
+  },
+  {
+    _id: 8,
+    title: 'Product 8',
+    desc: 'Description for Product 8',
+    category: 'Kids',
+    image: '/images/products/8.jpg',
+    price: '45.00'
   }
 ]
