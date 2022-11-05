@@ -1,0 +1,13 @@
+.wish-container {
+  min-height: 100vh;
+  padding: 30px 10px;
+}
+
+.wish-row:first-child {
+  margin-bottom: 40px;
+}
+
+.wish-title {
+  text-align: center;
+  letter-spacing: 3px;
+}

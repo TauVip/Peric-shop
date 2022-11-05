@@ -1,0 +1,38 @@
+.cart-container {
+  min-height: 100vh;
+  padding: 30px 10px;
+}
+
+.cart-row:first-child {
+  margin-bottom: 40px;
+}
+
+.cart-title {
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+.cart-row:nth-child(2) {
+  display: flex;
+  border: 1px solid red;
+  height: 100vh;
+}
+
+.cart-col:first-child {
+  flex: 3;
+  border: 1px solid black;
+}
+.cart-col:last-child {
+  flex: 1;
+  border: 1px solid black;
+}
+
+.info {
+  letter-spacing: 1.5px;
+}
+.info a {
+  color: #ff0000;
+}
+.info a:hover{
+  text-decoration: underline;
+}

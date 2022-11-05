@@ -5,10 +5,15 @@ import {
   faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Store } from '../Store'
 import '../styles/navbar.css'
 
 const Navbar = () => {
+  const { state } = useContext(Store)
+  const { cart, wish } = state
+
   return (
     <div className='n-container'>
       <div className='n-row'>
@@ -51,13 +56,19 @@ const Navbar = () => {
             <a href='/wish'>
               <span>
                 <FontAwesomeIcon icon={faHeart} />
-                <span className='totalItems'>0</span>
+                {wish.wishItems.length > 0 && (
+                  <span className='totalItems'>{wish.wishItems.length}</span>
+                )}
               </span>
             </a>
             <a href='/cart'>
               <span>
                 <FontAwesomeIcon icon={faShoppingBag} />
-                <span className='totalItems'>0</span>
+                {cart.cartItems.length > 0 && (
+                  <span className='totalItems'>
+                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                  </span>
+                )}
               </span>
             </a>
           </div>

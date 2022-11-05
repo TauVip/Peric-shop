@@ -14,3 +14,12 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.loading {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.error {
+  color: #ff0000;
+}
