@@ -5,7 +5,9 @@ export const Store = createContext()
 
 const initialState = {
   cart: {
-    cartItems: []
+    cartItems: localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem('cartItems'))
+      : []
   },
   wish: {
     wishItems: []
@@ -24,6 +26,7 @@ function reducer(state, action) {
             item._id === existItem._id ? newItem : item
           )
         : [...state.cart.cartItems, newItem]
+      localStorage.setItem('cartItems', JSON.stringify(cartItems))
 
       return { ...state, cart: { ...state.cart, cartItems } }
     case 'WISH_ADD_ITEM':
@@ -34,6 +37,22 @@ function reducer(state, action) {
           wishItems: [...state.wish.wishItems, action.payload]
         }
       }
+    case 'CART_REMOVE_ITEM': {
+      const cartItems = state.cart.cartItems.filter(
+        item => item._id !== action.payload._id
+      )
+      localStorage.setItem('cartItems', JSON.stringify(cartItems))
+
+      return { ...state, cart: { ...state.cart, cartItems } }
+    }
+    case 'WISH_REMOVE_ITEM': {
+      const wishItems = state.wish.wishItems.filter(
+        item => item._id !== action.payload._id
+      )
+      localStorage.setItem('wishItems', JSON.stringify(wishItems))
+
+      return { ...state, wish: { ...state.wish, wishItems } }
+    }
     default:
       break
   }

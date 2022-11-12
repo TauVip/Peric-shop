@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useContext } from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -10,6 +11,7 @@ import '../styles/productScreenCard.css'
 const ProductScreenCard = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store)
   const { cart, wish } = state
+  const navigate = useNavigate()
 
   const [selectedImage, setSelectedImage] = useState('')
 
@@ -25,6 +27,8 @@ const ProductScreenCard = ({ product }) => {
       type: 'CART_ADD_ITEM',
       payload: { ...product, quantity }
     })
+
+    navigate('/cart')
   }
 
   const addToWishHandler = () => {
@@ -40,6 +44,8 @@ const ProductScreenCard = ({ product }) => {
       type: 'WISH_ADD_ITEM',
       payload: { ...product, quantity }
     })
+
+    navigate('/wish')
   }
 
   return (
@@ -96,9 +102,15 @@ const ProductScreenCard = ({ product }) => {
               <p className='desc'>{product.desc}</p>
             </div>
             <div className='fourth-div div'>
-              <button className='cart' onClick={addToCartHandler}>
-                Add to Cart
-              </button>
+              {product.countInStock === 0 ? (
+                <button className='cart cart-out' disabled>
+                  Out of stock
+                </button>
+              ) : (
+                <button className='cart' onClick={addToCartHandler}>
+                  Add to Cart
+                </button>
+              )}
               <button className='wish' onClick={addToWishHandler}>
                 Add to Wish
               </button>

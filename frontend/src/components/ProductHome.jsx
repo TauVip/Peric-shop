@@ -65,9 +65,15 @@ const ProductHome = ({ item }) => {
         <button>
           <FontAwesomeIcon icon={faHeart} onClick={addToWishHandler} />
         </button>
-        <button>
-          <FontAwesomeIcon icon={faShoppingBag} onClick={addToCartHandler} />
-        </button>
+        {item.countInStock === 0 ? (
+          <button className='cart cart-out' disabled>
+            Out of stock
+          </button>
+        ) : (
+          <button>
+            <FontAwesomeIcon icon={faShoppingBag} onClick={addToCartHandler} />
+          </button>
+        )}
       </div>
       {open && <Quick item={item} />}
     </div>

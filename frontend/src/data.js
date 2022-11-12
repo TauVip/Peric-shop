@@ -42,6 +42,7 @@ export const products = [
     image1: '/images/products/2.jpg',
     image2: '/images/products/3.jpg',
     image3: '/images/products/4.jpg',
+    countInStock: 0,
     price: '65.00'
   },
   {
@@ -54,6 +55,7 @@ export const products = [
     image1: '/images/products/6.jpg',
     image2: '/images/products/7.jpg',
     image3: '/images/products/8.jpg',
+    countInStock: 5,
     price: '72.99'
   },
   {
@@ -66,6 +68,7 @@ export const products = [
     image1: '/images/products/10.jpg',
     image2: '/images/products/11.jpg',
     image3: '/images/products/12.jpg',
+    countInStock: 10,
     price: '80.00'
   },
   {
@@ -78,6 +81,7 @@ export const products = [
     image1: '/images/products/14.jpg',
     image2: '/images/products/15.jpg',
     image3: '/images/products/16.jpg',
+    countInStock: 4,
     price: '92.00'
   },
   {
@@ -90,6 +94,7 @@ export const products = [
     image1: '/images/products/18.jpg',
     image2: '/images/products/19.jpg',
     image3: '/images/products/20.jpg',
+    countInStock: 11,
     price: '87.00'
   },
   {
@@ -102,6 +107,7 @@ export const products = [
     image1: '/images/products/22.jpg',
     image2: '/images/products/23.jpg',
     image3: '/images/products/24.jpg',
+    countInStock: 12,
     price: '62.00'
   },
   {
@@ -114,6 +120,7 @@ export const products = [
     image1: '/images/products/26.jpg',
     image2: '/images/products/27.jpg',
     image3: '/images/products/28.jpg',
+    countInStock: 15,
     price: '76.00'
   },
   {
@@ -126,6 +133,7 @@ export const products = [
     image1: '/images/products/30.jpg',
     image2: '/images/products/31.jpg',
     image3: '/images/products/32.jpg',
+    countInStock: 13,
     price: '45.00'
   }
 ]

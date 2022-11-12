@@ -89,9 +89,15 @@ const Quick = ({ item }) => {
             <p className='desc'>{item.desc}</p>
           </div>
           <div className='fourth-div div'>
-            <button className='cart' onClick={addToCartHandler}>
-              Add to Cart
-            </button>
+            {item.countInStock === 0 ? (
+              <button className='cart cart-out' disabled>
+                Out of stock
+              </button>
+            ) : (
+              <button className='cart' onClick={addToCartHandler}>
+                Add to Cart
+              </button>
+            )}
             <button className='wish' onClick={addToWishHandler}>
               Add to Wish
             </button>

@@ -41,7 +41,7 @@ const data = {
       image1: '/images/products/2.jpg',
       image2: '/images/products/3.jpg',
       image3: '/images/products/4.jpg',
-      countInStock: 34,
+      countInStock: 0,
       price: '65.00'
     },
     {
