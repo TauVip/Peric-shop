@@ -4,19 +4,27 @@ import { createContext } from 'react'
 export const Store = createContext()
 
 const initialState = {
+  userInfo: localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo'))
+    : null,
   cart: {
+    shippingAddress: localStorage.getItem('shippingAddress')
+      ? JSON.parse(localStorage.getItem('shippingAddress'))
+      : {},
     cartItems: localStorage.getItem('cartItems')
       ? JSON.parse(localStorage.getItem('cartItems'))
       : []
   },
   wish: {
-    wishItems: []
+    wishItems: localStorage.getItem('wishItems')
+      ? JSON.parse(localStorage.getItem('wishItems'))
+      : []
   }
 }
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'CART_ADD_ITEM':
+    case 'CART_ADD_ITEM': {
       const newItem = action.payload
       const existItem = state.cart.cartItems.find(
         item => item._id === newItem._id
@@ -29,7 +37,19 @@ function reducer(state, action) {
       localStorage.setItem('cartItems', JSON.stringify(cartItems))
 
       return { ...state, cart: { ...state.cart, cartItems } }
-    case 'WISH_ADD_ITEM':
+    }
+    case 'WISH_ADD_ITEM': {
+      const newItem = action.payload
+      const existItem = state.wish.wishItems.find(
+        item => item._id === newItem._id
+      )
+      const wishItems = existItem
+        ? state.wish.wishItems.map(item =>
+            item._id === existItem._id ? newItem : item
+          )
+        : [...state.wish.wishItems, newItem]
+      localStorage.setItem('wishItems', JSON.stringify(wishItems))
+
       return {
         ...state,
         wish: {
@@ -37,6 +57,7 @@ function reducer(state, action) {
           wishItems: [...state.wish.wishItems, action.payload]
         }
       }
+    }
     case 'CART_REMOVE_ITEM': {
       const cartItems = state.cart.cartItems.filter(
         item => item._id !== action.payload._id
@@ -53,6 +74,19 @@ function reducer(state, action) {
 
       return { ...state, wish: { ...state.wish, wishItems } }
     }
+    case 'USER_SIGNIN':
+      return { ...state, userInfo: action.payload }
+    case 'USER_SIGNOUT':
+      return {
+        ...state,
+        userInfo: null,
+        cart: { cartItems: [], shippingAddress: {} }
+      }
+    case 'SAVE_SHIPPING_ADDRESS':
+      return {
+        ...state,
+        cart: { ...state.cart, shippingAddress: action.payload }
+      }
     default:
       break
   }

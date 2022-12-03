@@ -1,14 +1,14 @@
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-import SignIn from '../components/SignIn'
+import Register from '../components/Register'
 
-const Login = () => {
+const SignUp = () => {
   return (
     <div>
       <Navbar />
-      <SignIn />
+      <Register />
       <Footer />
     </div>
   )
 }
-export default Login
+export default SignUp

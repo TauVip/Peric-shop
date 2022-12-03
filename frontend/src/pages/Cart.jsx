@@ -37,7 +37,7 @@ const Cart = () => {
       payload: item
     })
 
-  const checkoutHandler = () => navigate('/signin?redirect=/shipping')
+  const checkoutHandler = () => navigate('/login?redirect=/shipping')
 
   return (
     <>

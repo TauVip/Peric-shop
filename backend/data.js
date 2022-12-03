@@ -1,38 +1,54 @@
+import bcrypt from 'bcryptjs'
+
 const data = {
+  users: [
+    {
+      name: 'qqq',
+      email: 'q@q.qq',
+      password: bcrypt.hashSync('qqqqqq'),
+      isAdmin: true
+    },
+    {
+      name: 'www',
+      email: 'w@w.ww',
+      password: bcrypt.hashSync('wwwwww'),
+      isAdmin: false
+    }
+  ],
   sliderItems: [
     {
-      _id: '1',
+      // _id: '1',
       image: '/images/slider/1.jpg'
     },
     {
-      _id: '2',
+      // _id: '2',
       image: '/images/slider/2.jpg'
     },
     {
-      _id: '3',
+      // _id: '3',
       image: '/images/slider/3.jpg'
     }
   ],
   category: [
     {
-      _id: '1',
+      // _id: '1',
       title: 'Men',
       image: '/images/category/men.jpg'
     },
     {
-      _id: '2',
+      // _id: '2',
       title: 'Women',
       image: '/images/category/women.jpg'
     },
     {
-      _id: '3',
+      // _id: '3',
       title: 'Kids',
       image: '/images/category/kids.jpg'
     }
   ],
   products: [
     {
-      _id: '1',
+      // _id: '1',
       title: 'Product 1',
       slug: 'product1',
       desc: 'Description for Product 1',
@@ -45,7 +61,7 @@ const data = {
       price: '65.00'
     },
     {
-      _id: '2',
+      // _id: '2',
       title: 'Product 2',
       slug: 'product2',
       desc: 'Description for Product 2',
@@ -58,7 +74,7 @@ const data = {
       price: '72.99'
     },
     {
-      _id: '3',
+      // _id: '3',
       title: 'Product 3',
       slug: 'product3',
       desc: 'Description for Product 3',
@@ -71,7 +87,7 @@ const data = {
       price: '80.00'
     },
     {
-      _id: '4',
+      // _id: '4',
       title: 'Product 4',
       slug: 'product4',
       desc: 'Description for Product 4',
@@ -84,7 +100,7 @@ const data = {
       price: '92.00'
     },
     {
-      _id: '5',
+      // _id: '5',
       title: 'Product 5',
       slug: 'product5',
       desc: 'Description for Product 5',
@@ -97,7 +113,7 @@ const data = {
       price: '87.00'
     },
     {
-      _id: '6',
+      // _id: '6',
       title: 'Product 6',
       slug: 'product6',
       desc: 'Description for Product 6',
@@ -110,7 +126,7 @@ const data = {
       price: '62.00'
     },
     {
-      _id: '7',
+      // _id: '7',
       title: 'Product 7',
       slug: 'product7',
       desc: 'Description for Product 7',
@@ -123,7 +139,7 @@ const data = {
       price: '76.00'
     },
     {
-      _id: '8',
+      // _id: '8',
       title: 'Product 8',
       slug: 'product8',
       desc: 'Description for Product 8',

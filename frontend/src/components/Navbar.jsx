@@ -6,22 +6,34 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Store } from '../Store'
 import '../styles/navbar.css'
 
 const Navbar = () => {
-  const { state } = useContext(Store)
-  const { cart, wish } = state
+  const { state, dispatch: ctxDispatch } = useContext(Store)
+  const { cart, wish, userInfo } = state
+
+  const signoutHandler = () => {
+    ctxDispatch({ type: 'USER_SIGNOUT' })
+    localStorage.removeItem('userInfo')
+    localStorage.removeItem('shippingAddress')
+  }
 
   return (
     <div className='n-container'>
       <div className='n-row'>
         <div className='n-col'>
           <span className='n-email'>ricpewebcode@gmail.com</span>
-          <span>
-            <FontAwesomeIcon icon={faUser} /> Guest
-          </span>
+          {userInfo ? (
+            <Link to='account'>
+              <FontAwesomeIcon icon={faUser} /> {userInfo.name}
+            </Link>
+          ) : (
+            <span>
+              <FontAwesomeIcon icon={faUser} /> Guest
+            </span>
+          )}
         </div>
         <div className='n-col'>
           <div className='socials'>
@@ -48,11 +60,19 @@ const Navbar = () => {
         </div>
         <div className='n-col'>
           <div className='icons'>
-            <a href='/login'>
-              <span>
-                <FontAwesomeIcon icon={faArrowRightToBracket} /> Login
-              </span>
-            </a>
+            {userInfo ? (
+              <Link to='#signout' onClick={signoutHandler}>
+                <span>
+                  <FontAwesomeIcon icon={faArrowRightToBracket} /> LogOut
+                </span>
+              </Link>
+            ) : (
+              <a href='/login'>
+                <span>
+                  <FontAwesomeIcon icon={faArrowRightToBracket} /> Login
+                </span>
+              </a>
+            )}
             <a href='/wish'>
               <span>
                 <FontAwesomeIcon icon={faHeart} />
