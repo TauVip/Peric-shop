@@ -11,3 +11,10 @@
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
 }
+
+@media screen and (max-width: 600px) {
+  .checkout-steps > p {
+    font-size: 12px;
+    margin: 0 10px;
+  }
+}

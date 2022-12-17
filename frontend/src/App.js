@@ -13,6 +13,7 @@ import './App.css'
 import Shipping from './components/Shipping'
 import SignUp from './pages/SignUp'
 import Payment from './pages/Payment'
+import PlaceOrder from './pages/PlaceOrder'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/shipping' element={<Shipping />} />
           <Route path='/payment' element={<Payment />} />
+          <Route path='/placeorder' element={<PlaceOrder />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />

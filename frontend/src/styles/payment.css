@@ -19,6 +19,18 @@
 .payment-col form {
   width: 310px;
 }
+.payment-row:last-child .payment-col form .form-group {
+  display: flex;
+  flex-direction: unset;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.payment-row:last-child .payment-col form .form-group input {
+  width: unset;
+  height: unset;
+  margin-left: 5px;
+}
 .payment-col form .form-group button {
   width: max-content;
   display: block;

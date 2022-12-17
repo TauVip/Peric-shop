@@ -1,11 +1,34 @@
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import CheckoutSteps from '../components/CheckoutSteps'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
+import { Store } from '../Store'
 import '../styles/payment.css'
 
 const Payment = () => {
+  const navigate = useNavigate()
+  const { state, dispatch: ctxDispatch } = useContext(Store)
+  const {
+    cart: { shippingAddress, paymentMethod }
+  } = state
+
+  const [paymentMethodName, setPaymentMethod] = useState(
+    paymentMethod || 'Cash'
+  )
+
+  useEffect(() => {
+    if (!shippingAddress.address) navigate('/shipping')
+  }, [navigate, shippingAddress])
+
   const submitHandler = async e => {
     e.preventDefault()
+
+    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName })
+    localStorage.setItem('paymentMethod', paymentMethodName)
+    navigate('/placeorder')
   }
 
   return (
@@ -25,17 +48,19 @@ const Payment = () => {
           <div className='payment-col'>
             <form onSubmit={submitHandler}>
               <div className='form-group'>
-                <label htmlFor='paypal'>PayPal</label>
+                <label htmlFor='cash'>Cash</label>
                 <input
-                  type='checkbox'
-                  className='checkbox'
+                  type='radio'
+                  value='Cash'
+                  checked={paymentMethodName === 'Cash'}
+                  className='radio'
                   name=''
-                  id='paypal'
+                  id='cash'
+                  onChange={e => setPaymentMethod(e.target.value)}
                 />
               </div>
               <div className='form-group'>
-                <label htmlFor='cash'>Cash</label>
-                <input type='checkbox' className='checkbox' name='' id='cash' />
+                <button type='submit'>Continue</button>
               </div>
             </form>
           </div>
