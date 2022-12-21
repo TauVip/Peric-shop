@@ -14,6 +14,7 @@ import Shipping from './components/Shipping'
 import SignUp from './pages/SignUp'
 import Payment from './pages/Payment'
 import PlaceOrder from './pages/PlaceOrder'
+import OrderDetails from './components/OrderDetails'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/product/:slug' element={<ProductScreen />} />
+          <Route path='/order/:id' element={<OrderDetails />} />
         </Routes>
       </div>
     </BrowserRouter>

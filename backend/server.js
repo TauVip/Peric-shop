@@ -7,6 +7,7 @@ import productRoutes from './routes/productRoutes.js'
 import categoryRouter from './routes/categoryRouter.js'
 import sliderRouter from './routes/sliderRoutes.js'
 import userRouter from './routes/userRoutes.js'
+import orderRouter from './routes/orderRoutes.js'
 
 dotenv.config()
 mongoose
@@ -24,6 +25,7 @@ app.use('/api/products/', productRoutes)
 app.use('/api/category/', categoryRouter)
 app.use('/api/slider/', sliderRouter)
 app.use('/api/users/', userRouter)
+app.use('/api/orders/', orderRouter)
 
 app.use((err, req, res, next) => res.status(500).send({ message: err.message }))
 
