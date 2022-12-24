@@ -15,6 +15,8 @@ import SignUp from './pages/SignUp'
 import Payment from './pages/Payment'
 import PlaceOrder from './pages/PlaceOrder'
 import OrderDetails from './components/OrderDetails'
+import Account from './components/Account'
+import OrderHistory from './components/OrderHistory'
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path='/payment' element={<Payment />} />
           <Route path='/placeorder' element={<PlaceOrder />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/account' element={<Account />} />
+          <Route path='/orderhistory' element={<OrderHistory />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/product/:slug' element={<ProductScreen />} />

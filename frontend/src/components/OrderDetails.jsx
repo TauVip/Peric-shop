@@ -7,7 +7,9 @@ import { useReducer } from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
 import { Store } from '../Store'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios'
+import { getError } from '../utils'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -25,6 +27,8 @@ function reducer(state, action) {
 const OrderDetails = () => {
   const { state } = useContext(Store)
   const { userInfo } = state
+  const params = useParams()
+  const { id: orderId } = params
   const navigate = useNavigate()
   const [{ loading, error, order }, dispatch] = useReducer(reducer, {
     loading: true,
@@ -33,8 +37,22 @@ const OrderDetails = () => {
   })
 
   useEffect(() => {
+    const fetchOrder = async () => {
+      try {
+        dispatch({ type: 'FETCH_REQUEST' })
+        const { data } = await axios.get(`/api/orders/${orderId}`, {
+          headers: { authorization: `Bearer ${userInfo.token}` }
+        })
+        dispatch({ type: 'FETCH_SUCCESS', payload: data })
+      } catch (err) {
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
+      }
+    }
+
     if (!userInfo) return navigate('/login')
-  }, [navigate, userInfo])
+
+    if (!order._id || (order._id && order._id !== orderId)) fetchOrder()
+  }, [navigate, order._id, orderId, userInfo])
 
   return loading ? (
     <LoadingBox />
@@ -44,7 +62,78 @@ const OrderDetails = () => {
     <>
       <Navbar />
 
-      <div className='order-details-container'></div>
+      <div className='order-details-container'>
+        <div className='order-details-row'>
+          <div className='order-details-col'>
+            <h2 className='order-details-title'>Your Order</h2>
+            <h4 className='order-details-subtitle'>Order ID: {orderId}</h4>
+          </div>
+        </div>
+        <div className='order-row'>
+          <div className='order-col'>
+            <div className='order-shipping'>
+              <h2 className='order-shipping-title'>Shipping</h2>
+              <p className='order-shipping-info'>
+                {order.shippingAddress.fullName},{' '}
+                {order.shippingAddress.address},{' '}
+                {order.shippingAddress.postalCode}, {order.shippingAddress.city}
+                , {order.shippingAddress.country}
+              </p>
+              {order.isPaid ? (
+                <span> Paid at {order.deliveredAt} </span>
+              ) : (
+                <span>Not Delivered</span>
+              )}
+            </div>
+            <div className='order-payment'>
+              <h4>Payment:</h4>
+              <span>{order.paymentMethod} - </span>
+              {order.isPaid ? (
+                <span> Paid at {order.paidAt} </span>
+              ) : (
+                <span>Not Paid</span>
+              )}
+              <br />
+              <span className='after'>* You will pay after delivery</span>
+            </div>
+            <div className='order-items'>
+              <h4 className='order-items-title'>Items:</h4>
+              <div className='order-cards'>
+                {order.orderItems.map(item => (
+                  <div className='order-card' key={item._id}>
+                    <div className='order-card-body'>
+                      <img src={item.image} alt={item.name} />
+                    </div>
+                    <div className='order-card-footer'>
+                      <span>{item.quantity}</span>
+                      <span>${item.price}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className='order-col'>
+            <h2 className='order-summary'>Order Summary</h2>
+            <div className='order-summary-info'>
+              <h4>Items</h4>
+              <span>${order.itemsPrice.toFixed(2)}</span>
+            </div>
+            <div className='order-summary-info'>
+              <h4>Shipping</h4>
+              <span>${order.shippingPrice.toFixed(2)}</span>
+            </div>
+            <div className='order-summary-info'>
+              <h4>Tax</h4>
+              <span>${order.taxPrice.toFixed(2)}</span>
+            </div>
+            <div className='order-summary-info'>
+              <h4>Total</h4>
+              <span>${order.totalPrice.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <Footer />
     </>

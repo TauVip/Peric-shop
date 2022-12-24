@@ -27,7 +27,7 @@ const Navbar = () => {
         <div className='n-col'>
           <span className='n-email'>ricpewebcode@gmail.com</span>
           {userInfo ? (
-            <Link to='account'>
+            <Link to='/account'>
               <FontAwesomeIcon icon={faUser} /> {userInfo.name}
             </Link>
           ) : (
